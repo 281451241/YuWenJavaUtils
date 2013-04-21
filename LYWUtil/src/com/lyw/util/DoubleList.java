@@ -40,6 +40,10 @@ public class DoubleList<T> {
 		return false;
 	}
 
+	/**
+	 * 取下一节点元素 
+	 * @return
+	 */
 	public T getNext() {
 		if (hasNext()) {
 			return current.getNext().getElement();
@@ -47,6 +51,10 @@ public class DoubleList<T> {
 		return null;
 	}
 
+	/**
+	 * 取上一节点元素 
+	 * @return
+	 */
 	public T getPre() {
 		if (hasPre()) {
 			return current.getPre().getElement();
