@@ -1,4 +1,4 @@
-package pattern.singleton;
+package com.lyw.pattern.singleton;
 
 public class LazySingleton {
 	private LazySingleton(){}

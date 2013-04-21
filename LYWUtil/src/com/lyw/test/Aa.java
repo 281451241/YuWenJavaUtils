@@ -1,4 +1,4 @@
-package test;
+package com.lyw.test;
 
 import java.io.Serializable;
 

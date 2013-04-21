@@ -1,4 +1,4 @@
-package pattern.singleton;
+package com.lyw.pattern.singleton;
 
 import java.io.Serializable;
 

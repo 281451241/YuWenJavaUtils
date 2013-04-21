@@ -1,4 +1,4 @@
-package test;
+package com.lyw.test;
 
 public abstract class TestInterface implements c {
 

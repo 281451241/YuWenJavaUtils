@@ -1,4 +1,4 @@
-package test;
+package com.lyw.test;
 
 abstract class Animal {
 	public void saySomething() {

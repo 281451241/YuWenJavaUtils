@@ -1,4 +1,4 @@
-package thread;
+package com.lyw.thread;
 
 public class TestThread {
 	int count = 0;

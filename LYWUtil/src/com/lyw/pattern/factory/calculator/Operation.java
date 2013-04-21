@@ -1,4 +1,4 @@
-package pattern.factory.calculator;
+package com.lyw.pattern.factory.calculator;
 
 public class Operation {
 	public static double getResult(double numA, double numB,

@@ -1,9 +1,10 @@
-package util;
+package com.lyw.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-import pojo.Users;
+import com.lyw.pojo.Users;
+
 
 public class TestReflect {
 	public void loadClass() throws Throwable {

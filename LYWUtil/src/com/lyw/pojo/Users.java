@@ -1,4 +1,4 @@
-package pojo;
+package com.lyw.pojo;
 
 public class Users {
 	private String id;

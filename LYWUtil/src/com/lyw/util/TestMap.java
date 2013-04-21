@@ -1,4 +1,4 @@
-package util;
+package com.lyw.util;
 
 import java.util.HashMap;
 import java.util.Map;
