@@ -1,4 +1,4 @@
-package com.lywmybatis;
+package com.lyw.mybatis;
 
 import java.util.List;
 

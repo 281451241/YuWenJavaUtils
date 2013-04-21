@@ -1,4 +1,4 @@
-package com.lywmybatis;
+package com.lyw.mybatis;
 /**
  * 
  * 说明：登陆用户model
