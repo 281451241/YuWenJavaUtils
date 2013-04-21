@@ -1,4 +1,4 @@
-package mybatis;
+package com.lywmybatis;
 
 import java.io.Reader;
 import java.util.Iterator;

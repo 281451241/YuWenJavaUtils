@@ -1,4 +1,4 @@
-package mybatis;
+package com.lywmybatis;
 
 public class User {
     private int userId;

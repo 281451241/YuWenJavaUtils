@@ -1,4 +1,4 @@
-package mybatis;
+package com.lywmybatis;
 
 
 public interface BlogMapper {
