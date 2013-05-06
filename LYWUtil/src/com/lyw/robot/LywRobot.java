@@ -13,9 +13,9 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-public class TestRobot
+public class LywRobot
 {
-	public TestRobot()
+	public LywRobot()
 	{
 		try
 		{
@@ -51,8 +51,8 @@ public class TestRobot
 
 	private int screenWidth;
 	private int screenHeight;
-	private String imageFormat = "jpg"; //图像文件的格式
-	
+	private String imageFormat = "jpg"; // 图像文件的格式
+
 	public void setScreenWidth(int screenWidth)
 	{
 		this.screenWidth = screenWidth;
@@ -105,10 +105,11 @@ public class TestRobot
 	public void moveToDes(int desX, int desY)
 	{
 		Point mousepoint = MouseInfo.getPointerInfo().getLocation();
+		int stepSize = (int) (10 + Math.random() * 10);
 		int curX = mousepoint.x;
 		int curY = mousepoint.y;
-		int stepX = (desX - curX) / 10;
-		int stepY = (desY - curY) / 10;
+		int stepX = (desX - curX) / stepSize;
+		int stepY = (desY - curY) / stepSize;
 		for (int i = 0; i < 10; i++)
 		{
 			curX += stepX;
@@ -122,7 +123,8 @@ public class TestRobot
 	{
 		try
 		{
-			BufferedImage mBufferedImage = mRobot.createScreenCapture(new Rectangle(x, y, w, h));
+			BufferedImage mBufferedImage = mRobot
+					.createScreenCapture(new Rectangle(x, y, w, h));
 			File temp = new File(tarName);
 			ImageIO.write(mBufferedImage, imageFormat, temp);
 		}
@@ -135,7 +137,7 @@ public class TestRobot
 
 	public static void main(String[] args)
 	{
-		TestRobot tr = new TestRobot();
+		LywRobot tr = new LywRobot();
 	}
 
 	private Robot mRobot;
