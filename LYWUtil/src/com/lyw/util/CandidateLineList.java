@@ -1,39 +1,43 @@
 package com.lyw.util;
 
 
-public class DoubleList<T> {
+public class CandidateLineList<T> {
 	private DNode current;
 	private DNode last;
 	private DNode head;
+	private int dNodeSize;
 
-	public DoubleList() {
+	public CandidateLineList() {
 		current = new DNode(null);
 		last = current;
 		head = current;
+		dNodeSize = 0;
 	}
 
 	public void add(T element) {
 		current = last;
 		DNode nextNode = new DNode(element);
-		current.setNextNode(nextNode);
-		nextNode.setPreNode(current);
-		current = current.getNextNode();
+		current.nextNode = nextNode;
+		nextNode.preNode = current;
+		current = current.nextNode;
 		last = current;
+		dNodeSize++;
 	}
 
 	public void addAndMoveToFirst(T element) {
 		current = last;
-		current.setNextNode(new DNode(element));
-		last = current.getNextNode();
+		current.nextNode = new DNode(element);
+		last = current.nextNode;
 		current = head;
+		dNodeSize++;
 	}
 
 	public void moveToNext() {
-		current = current.getNextNode();
+		current = current.nextNode;
 	}
 
 	public void moveToPre() {
-		current = current.getPreNode();
+		current = current.preNode;
 	}
 
 	public void moveToFirst() {
@@ -41,14 +45,14 @@ public class DoubleList<T> {
 	}
 
 	public boolean hasNext() {
-		if (current.getNextNode() != null) {
+		if (current.nextNode != null) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean hasPre() {
-		if (current.getPreNode() != null) {
+		if (current.preNode != null) {
 			return true;
 		}
 		return false;
@@ -61,7 +65,7 @@ public class DoubleList<T> {
 	 */
 	public T getNext() {
 		if (hasNext()) {
-			return current.getNextNode().getElement();
+			return current.nextNode.element;
 		}
 		return null;
 	}
@@ -73,45 +77,25 @@ public class DoubleList<T> {
 	 */
 	public T getPre() {
 		if (hasPre()) {
-			return current.getPreNode().getElement();
+			return current.preNode.element;
 		}
 		return null;
 	}
 
 	public T getCur() {
-		return current.getElement();
+		return current.element;
+	}
+	
+	public int size() {
+		return dNodeSize;
 	}
 
 	private class DNode {
-		private DNode nextNode;
-		private DNode preNode;
-		private T element;
+		public DNode nextNode;
+		public DNode preNode;
+		public T element;
 
 		public DNode(T element) {
-			this.element = element;
-		}
-
-		public DNode getNextNode() {
-			return nextNode;
-		}
-
-		public void setNextNode(DNode nextNode) {
-			this.nextNode = nextNode;
-		}
-
-		public DNode getPreNode() {
-			return preNode;
-		}
-
-		public void setPreNode(DNode preNode) {
-			this.preNode = preNode;
-		}
-
-		public T getElement() {
-			return element;
-		}
-
-		public void setElement(T element) {
 			this.element = element;
 		}
 
