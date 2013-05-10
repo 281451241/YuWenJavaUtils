@@ -39,11 +39,62 @@ public class TestThread {
 			System.out.println(total);
 		}
 	}
+	
+	private void testJion() {
+		try
+		{
+			Thread td = new Thread() {
+				public void run() {
+					for(int i=0; i<20; i++) {
+						System.out.println("i: " + i);
+						try
+						{
+							Thread.sleep(100);
+						}
+						catch (InterruptedException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				};
+			};
+			td.start();
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void testSleep() {
+		System.out.println("Thread start!");
+		new Thread(){
+			@Override
+			public void run()
+			{
+				try
+				{
+					System.out.println("sleep start!");
+					sleep(3000);
+					System.out.println("sleep ok!");
+				}
+				catch (InterruptedException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}.start();
+		System.out.println("Thread ok!");
+	}
 
 	public static void main(String[] args) {
 		TestThread tt = new TestThread();
 //		tt.firstThread();
-		tt.t();
-
+//		tt.t();
+		
+		tt.testJion();
 	}
 }
