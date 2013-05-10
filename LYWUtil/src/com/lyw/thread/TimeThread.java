@@ -50,11 +50,38 @@ class Threads extends Thread
 	}
 }
 
+class TestThreads extends Thread {
+	
+	Timer timer;  //定时器
+	
+	public TestThreads()
+	{
+		timer = new Timer(5000, null);	//定时5秒
+		timer.setRepeats(false);
+	}
+	
+	@Override
+	public void run()
+	{
+		timer.start();
+		long cur = System.currentTimeMillis();
+		while (true)
+		{
+			if (!timer.isRunning())
+			{
+				System.out.println("End");
+				break;
+			}
+		}
+		System.out.println(System.currentTimeMillis() - cur);
+	}
+}
+
 public class TimeThread
 {
 	public static void main(String args[])
 	{
-		Threads t = new Threads();
+		TestThreads t = new TestThreads();
 		t.start();
 	}
 }
