@@ -26,27 +26,6 @@ public class LywRobot
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		moveToDes(0, 0);
-	}
-
-	private void sleep(final long millis)
-	{
-		new Thread()
-		{
-			public void run()
-			{
-				try
-				{
-					sleep(millis);
-				}
-				catch (InterruptedException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			};
-		}.start();
 	}
 
 	private int screenWidth;
@@ -77,17 +56,6 @@ public class LywRobot
 		return screenHeight;
 	}
 
-	private void test()
-	{
-		getScreenHeight();
-		mRobot.mouseMove(400, screenHeight - 10);
-		mRobot.mousePress(InputEvent.BUTTON3_MASK);
-
-		mRobot.delay(10);
-
-		mRobot.mouseRelease(InputEvent.BUTTON3_MASK);
-	}
-
 	public void leftKeyOnClick()
 	{
 		mRobot.mousePress(InputEvent.BUTTON1_MASK);
@@ -105,12 +73,12 @@ public class LywRobot
 	public void moveToDes(int desX, int desY)
 	{
 		Point mousepoint = MouseInfo.getPointerInfo().getLocation();
-		int stepSize = (int) (10 + Math.random() * 10);
+		int stepSize = (int) (Math.random() * 10);
 		int curX = mousepoint.x;
 		int curY = mousepoint.y;
 		int stepX = (desX - curX) / stepSize;
 		int stepY = (desY - curY) / stepSize;
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < stepSize; i++)
 		{
 			curX += stepX;
 			curY += stepY;
@@ -130,7 +98,6 @@ public class LywRobot
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
