@@ -102,10 +102,5 @@ public class LywRobot
 		}
 	}
 
-	public static void main(String[] args)
-	{
-		LywRobot tr = new LywRobot();
-	}
-
 	private Robot mRobot;
 }
