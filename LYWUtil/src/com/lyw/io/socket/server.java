@@ -1,104 +1,81 @@
 package com.lyw.io.socket;
 
-import java.io.DataOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.nio.ByteBuffer;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 
 public class server
 {
-	private static int SERVER_POINT = 5778;
-	private static server myserver;
-	static ExecutorService serviceExecutors;
-
 	public static void main(String[] args)
 	{
-		serviceExecutors = Executors.newFixedThreadPool(10);
-		myserver = new server();
-		new Thread()
-		{
-			@Override
-			public void run()
-			{
-				ServerSocket tcpSocket = null;
-				try
-				{
-
-					tcpSocket = new ServerSocket(SERVER_POINT);
-					System.out.println("开始监听..." + SERVER_POINT);
-					while (true)
-					{
-						Socket scoket = tcpSocket.accept();
-						Thread clientThread = myserver.new SingleClientThread(
-								scoket);
-						serviceExecutors.execute(clientThread);
-					}
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					try
-					{
-						tcpSocket.close();
-						System.out.println("停止监听..." + SERVER_POINT);
-					}
-					catch (IOException e1)
-					{
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-
-			}
-		}.start();
+		System.out.println("in server!");
+		ServerThread server = new ServerThread();
+		new Thread(server).start();
 	}
 
-	class SingleClientThread extends Thread
+	static class ServerThread implements Runnable
 	{
-		Socket scoketClient;
-
-		SingleClientThread(Socket client)
+		public void run()
 		{
-			this.scoketClient = client;
+			try
+			{
+				ServerSocketChannel sc = ServerSocketChannel.open();
+				ServerSocket s = sc.socket();
+				s.bind(new InetSocketAddress(8234));
+				while (true)
+				{
+					Socket incoming = s.accept();
+					Runnable r = new GetObjThread(incoming);
+					Thread t = new Thread(r);
+					t.start();
+				}
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
+	static class GetObjThread implements Runnable
+	{
+		public GetObjThread(Socket s)
+		{
+			incoming = s;
 		}
 
 		public void run()
 		{
 			try
 			{
-				System.out.println("新连接..." + scoketClient.toString());
-				ObjectInputStream is = new ObjectInputStream(
-						scoketClient.getInputStream());
-				DataOutputStream os = new DataOutputStream(
-						scoketClient.getOutputStream());
-				User u = null;
-				try
-				{
-					if(is.readObject() instanceof User)
-						u = (User) is.readObject();
-					System.out.println("得到字符串..." + u.getName());
-				}
-				catch (ClassNotFoundException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("准备返回结果...");
-				os.writeUTF(scoketClient.toString() + "result_ok");
-				System.out.println("成功返回结果...");
-				os.close();
-				scoketClient.close();
-				System.out.println("连接关闭..." + SERVER_POINT);
+				SocketChannel sc = incoming.getChannel();
+				ByteBuffer bbIn = ByteBuffer.allocate(1024);
+				sc.read(bbIn);
+				sc.close();
+				bbIn.flip();
+				ByteArrayInputStream bIn = new ByteArrayInputStream(
+						bbIn.array());
+				ObjectInputStream in = new ObjectInputStream(bIn);
+				String nStu = (String) in.readObject();
+				System.out.println("student id is " + nStu+ "\n"
+						+ "student name is ");
 			}
 			catch (IOException e)
 			{
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{
 				e.printStackTrace();
 			}
 		}
+
+		private Socket incoming;
 	}
 }

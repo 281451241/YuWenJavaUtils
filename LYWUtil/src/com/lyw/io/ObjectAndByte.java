@@ -6,65 +6,100 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class ObjectAndByte {
+public class ObjectAndByte
+{
 
 	/**
 	 * 对象转数组
+	 * 
 	 * @param obj
 	 * @return
 	 */
-	public byte[] toByteArray (Object obj) {   
-		byte[] bytes = null;   
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();   
-		try {     
-			ObjectOutputStream oos = new ObjectOutputStream(bos);      
-			oos.writeObject(obj);     
-			oos.flush();      
-			bytes = bos.toByteArray ();   
-			oos.close();      
-			bos.close();     
-		} catch (IOException ex) {     
+	public byte[] toByteArray(Object obj)
+	{
+		byte[] bytes = null;
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		try
+		{
+			ObjectOutputStream oos = new ObjectOutputStream(bos);
+			oos.writeObject(obj);
+			oos.flush();
+			bytes = bos.toByteArray();
+			oos.close();
+			bos.close();
+		}
+		catch (IOException ex)
+		{
 			ex.printStackTrace();
-		}   
-		return bytes; 
+		}
+		return bytes;
 	}
-	
+
 	/**
 	 * 数组转对象
+	 * 
 	 * @param bytes
 	 * @return
 	 */
-	public Object toObject (byte[] bytes) {   
-		Object obj = null;   
-		try {     
-			ByteArrayInputStream bis = new ByteArrayInputStream (bytes);     
-			ObjectInputStream ois = new ObjectInputStream (bis);     
-			obj = ois.readObject();   
+	public Object toObject(byte[] bytes)
+	{
+		Object obj = null;
+		try
+		{
+			ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+			ObjectInputStream ois = new ObjectInputStream(bis);
+			obj = ois.readObject();
 			ois.close();
 			bis.close();
-		} catch (IOException ex) {     
+		}
+		catch (IOException ex)
+		{
 			ex.printStackTrace();
-		} catch (ClassNotFoundException ex) {     
+		}
+		catch (ClassNotFoundException ex)
+		{
 			ex.printStackTrace();
-		}   
-		return obj; 
+		}
+		return obj;
 	}
-	
-	public static void main(String[] args) {
+
+	public static void main(String[] args)
+	{
 		TestBean tb = new TestBean();
 		tb.setName("daqing");
 		tb.setValue("1234567890");
-		
+
 		ObjectAndByte oa = new ObjectAndByte();
 		byte[] b = oa.toByteArray(tb);
 		System.out.println(new String(b));
-		
+
 		System.out.println("=======================================");
-		
-//		TestBean teb = (TestBean) oa.toObject(b);
-//		System.out.println(teb.getName());
-//		System.out.println(teb.getValue());
+
+		// TestBean teb = (TestBean) oa.toObject(b);
+		// System.out.println(teb.getName());
+		// System.out.println(teb.getValue());
 	}
 
-}
+	public static byte[] getBytes(Object obj) throws IOException
+	{
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		ObjectOutputStream out = new ObjectOutputStream(bout);
+		out.writeObject(obj);
+		out.flush();
+		byte[] bytes = bout.toByteArray();
+		bout.close();
+		out.close();
+		return bytes;
+	}
 
+	public static Object getObject(byte[] bytes) throws IOException,
+			ClassNotFoundException
+	{
+		ByteArrayInputStream bi = new ByteArrayInputStream(bytes);
+		ObjectInputStream oi = new ObjectInputStream(bi);
+		Object obj = oi.readObject();
+		bi.close();
+		oi.close();
+		return obj;
+	}
+}

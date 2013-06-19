@@ -1,13 +1,8 @@
 package com.lyw.io.socket;
 
-import java.io.Serializable;
 
-public class User implements Serializable
+public class Student
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	
@@ -22,5 +17,11 @@ public class User implements Serializable
 	
 	public String getName() {
 		return name;
+	}
+
+	public int getId()
+	{
+		// TODO Auto-generated method stub
+		return id;
 	}
 }
