@@ -9,6 +9,7 @@ import java.util.Locale;
 public class TestDate {
 
 	public static void main(String[] args) {
+//		System.out.println("TestDate");
 		// SimpleDateFormat sdf = new
 		// SimpleDateFormat("yyyy-MM-dd",Locale.CHINESE);
 		// String str = sdf.format(Calendar.getInstance().getTime());
@@ -27,18 +28,38 @@ public class TestDate {
 
 		// System.out.println(TestDate.getAstro("2013-02-27"));
 
-		new TestDate().testCalender();
+//		new TestDate().testCalender();
 
 		// System.out.println(td.getAstro(2, 29));
 
-		System.out.println(getLoginTime("001359946502639"));
+//		System.out.println(getLoginTime("001359946502639"));
+//		System.out.println(TestDate.format(yyyyMMddhhMMss, "20130705150124").getHours());
+//		System.out.println(TestDate.format(yyyyMMddhhMMss, "20130705150124").compareTo(Calendar.getInstance().getTime()));
+		System.out.println(new TestDate().getMillisec(null));
 	}
 
 	private static SimpleDateFormat sdf = new SimpleDateFormat(
 			"yyyy年MM月dd日  hh:mm");
+	private static SimpleDateFormat yyyyMMddhhMMss = new SimpleDateFormat(
+			"yyyyMMddhhMMss");
 	private static SimpleDateFormat forDB = new SimpleDateFormat("yyyy-MM-dd",
 			Locale.CHINESE);
 
+	/**
+	 * 按指定格式匹配字符串,返回Date
+	 * @param sdf
+	 * @param str
+	 * @return
+	 */
+	public static Date format(SimpleDateFormat sdf, String str) {
+		Date date = null;
+		try {
+			date = sdf.parse(str);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
+	}
 	public static String format(Date d) {
 		return sdf.format(d);
 	}
@@ -135,4 +156,18 @@ public class TestDate {
 		System.out.println(parseforDB(c.getTime()));
 	}
 
+	private long getMillisec(String str)
+	{
+		long millisecond = 0;
+		try
+		{
+			millisecond = new SimpleDateFormat("yyyyMMddhhMMss").parse(str)
+					.getTime();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		return millisecond;
+	}
 }

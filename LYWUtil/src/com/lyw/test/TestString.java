@@ -18,6 +18,16 @@ public class TestString {
 		System.out.println(b);
 	}
 	
+	/**
+	 * 字符串匹配数字
+	 */
+	private static void isMatchNumber() {
+		long cur = System.currentTimeMillis();
+		boolean b = "15".matches("\\d+");
+		System.out.println(System.currentTimeMillis() - cur);
+		System.out.println(b);
+	}
+	
 	
 	
 	private void replace() {
@@ -39,12 +49,15 @@ public class TestString {
 		str = "test ok";
 		i = 1;
 	}
+	
 	public static void main(String[] args) {
-		TestString ts = new TestString();
+//		TestString ts = new TestString();
+		isMatchNumber();
 //		ts.isMatchWord("1991-2-1");
-		ts.change(str, i);
-		System.out.println(str + ":" + i);
-		ts.change();
-		System.out.println(str + ":" + i);
+//		Integer.parseInt(null);
+//		ts.change(str, i);
+//		System.out.println(str + ":" + i);
+//		ts.change();
+//		System.out.println(str + ":" + i);
 	}
 }
