@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class ReadFile {
 	public void read() {
@@ -26,25 +27,91 @@ public class ReadFile {
 		}
 		System.out.println(str);
 	}
-
-	public boolean readName(File target) {
-		boolean flag = false;
+	
+	LinkedList<String> list = new LinkedList<String>();
+	private void readName(File target, boolean onlyName) {
 		try {
 			if (target.isDirectory()) {
 				File[] files = target.listFiles();
 				for (File f : files) {
-					readName(f);
+					readName(f,onlyName);
 				}
 			} else {
-				System.out.println(target.getAbsolutePath());
+				String path = target.getAbsolutePath();
+				if(onlyName) 
+					list.add(path.substring(path.lastIndexOf(File.separator)+1));
+				else
+					list.add(path);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return flag;
+	}
+	private void readName(File target, String startStr) {
+		try {
+			if (target.isDirectory()) {
+				File[] files = target.listFiles();
+				for (File f : files) {
+					readName(f, startStr);
+				}
+			} else {
+				String path = target.getAbsolutePath();
+				String name = path.substring(path.lastIndexOf(File.separator)+1);
+				if(name.startsWith(startStr)) 
+					list.add(name);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private void readName(File target, String startStr, String endStr) {
+		try {
+			if (target.isDirectory()) {
+				File[] files = target.listFiles();
+				for (File f : files) {
+					readName(f, startStr, endStr);
+				}
+			} else {
+				String path = target.getAbsolutePath();
+				String name = path.substring(path.lastIndexOf(File.separator)+1);
+				if(name.startsWith(startStr) && name.endsWith(endStr)) 
+					list.add(name);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public LinkedList<String> getFileList(String path, String startStr, String endStr) {
+		File target = new File(path);
+		readName(target, startStr, endStr);
+		return list;
+	}
+	
+	public LinkedList<String> getFileList(String path, String startStr) {
+		File target = new File(path);
+		readName(target, startStr);
+		return list;
+	}
+	
+	public LinkedList<String> getFileList(String path, boolean onlyName) {
+		File target = new File(path);
+		readName(target, onlyName);
+		return list;
+	}
+	
+	public LinkedList<String> getFileList(File target, boolean onlyName) {
+		readName(target, onlyName);
+		return list;
+	}
+	
+	public LinkedList<String> getFileList(File target) {
+		readName(target, false);
+		return list;
 	}
 	
 	public static void main(String[] args) {
-		new ReadFile().readName(new File("D:/ant/vss2005"));
+		for(String str : new ReadFile().getFileList(new File("D:/IDE"), true))
+			System.out.println(str);
 	}
 }
