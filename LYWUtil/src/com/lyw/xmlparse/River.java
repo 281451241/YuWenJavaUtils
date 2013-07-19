@@ -7,7 +7,7 @@ public class River implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private int length;
+	private String length;
 	private String introduction;
 
 	public String getName()
@@ -20,12 +20,12 @@ public class River implements Serializable
 		this.name = name;
 	}
 
-	public int getLength()
+	public String getLength()
 	{
 		return length;
 	}
 
-	public void setLength(int length)
+	public void setLength(String length)
 	{
 		this.length = length;
 	}

@@ -18,6 +18,7 @@ public class MainTest
 		for(String str : list) {
 			System.out.print("<item>");
 			System.out.print(DOMParseImpl.DOMParse("D:/projects/AlphabeticIME/res/xml/" + str).get(0).getName());
+			System.out.print("_"+DOMParseImpl.DOMParse("D:/projects/AlphabeticIME/res/xml/" + str).get(0).getLength());
 			System.out.println("</item>");
 			count++;
 		}
