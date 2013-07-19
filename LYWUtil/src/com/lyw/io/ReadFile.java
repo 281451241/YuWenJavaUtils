@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class ReadFile {
-	public void read() {
+	public String read() {
 		String string, str = null;
 		try {
 			FileReader in = new FileReader("E:/a.html");
@@ -16,25 +16,48 @@ public class ReadFile {
 			string = "";
 			str = "";
 			while ((string = br.readLine()) != null) {
-				str += string;
+				System.out.println(string);
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(str);
+		return str;
 	}
 	
-	LinkedList<String> list = new LinkedList<String>();
-	private void readName(File target, boolean onlyName) {
+	/**
+	 * 读取文件
+	 * 并根据其格式返回字符串
+	 * @param fileName 文件绝对路径+文件名
+	 * @return
+	 */
+	public String read(String fileName) {
+		String string, str = null;
+		try {
+			FileReader in = new FileReader(fileName);
+			BufferedReader br = new BufferedReader(in);
+			string = "";
+			str = "";
+			while ((string = br.readLine()) != null) {
+				str += string + '\n';
+				
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return str;
+	}
+	
+	private LinkedList<String> readName(File target, boolean onlyName) {
+		LinkedList<String> list = new LinkedList<String>();
 		try {
 			if (target.isDirectory()) {
 				File[] files = target.listFiles();
 				for (File f : files) {
-					readName(f,onlyName);
+					list.addAll(readName(f,onlyName));
 				}
 			} else {
 				String path = target.getAbsolutePath();
@@ -46,13 +69,15 @@ public class ReadFile {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return list;
 	}
-	private void readName(File target, String startStr) {
+	private LinkedList<String> readName(File target, String startStr) {
+		LinkedList<String> list = new LinkedList<String>();
 		try {
 			if (target.isDirectory()) {
 				File[] files = target.listFiles();
 				for (File f : files) {
-					readName(f, startStr);
+					list.addAll(readName(f, startStr));
 				}
 			} else {
 				String path = target.getAbsolutePath();
@@ -63,13 +88,15 @@ public class ReadFile {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return list;
 	}
-	private void readName(File target, String startStr, String endStr) {
+	private LinkedList<String> readName(File target, String startStr, String endStr) {
+		LinkedList<String> list = new LinkedList<String>();
 		try {
 			if (target.isDirectory()) {
 				File[] files = target.listFiles();
 				for (File f : files) {
-					readName(f, startStr, endStr);
+					list.addAll(readName(f, startStr, endStr));
 				}
 			} else {
 				String path = target.getAbsolutePath();
@@ -80,38 +107,66 @@ public class ReadFile {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return list;
 	}
 	
+	/**
+	 * 获取目录下所有以startStr/endStr开头结尾的文件名(不包括路径)
+	 * @param path
+	 * @param startStr
+	 * @param endStr
+	 * @return
+	 */
 	public LinkedList<String> getFileList(String path, String startStr, String endStr) {
-		File target = new File(path);
-		readName(target, startStr, endStr);
-		return list;
+		return readName(new File(path), startStr, endStr);
 	}
 	
+	/**
+	 * 获取目录下所有以startStr开头的文件名(不包括路径)
+	 * @param path
+	 * @param startStr
+	 * @return
+	 */
 	public LinkedList<String> getFileList(String path, String startStr) {
-		File target = new File(path);
-		readName(target, startStr);
-		return list;
+		return readName(new File(path), startStr);
 	}
 	
+	/**
+	 * 获取目录下所有的文件名(包括路径)
+	 * 若变量为文件的话,则返回该文件名(包括路径)
+	 * 若onlyName为true的话,则返回文件名(不包括路径)
+	 * @param path
+	 * @param onlyName
+	 * @return
+	 */
 	public LinkedList<String> getFileList(String path, boolean onlyName) {
-		File target = new File(path);
-		readName(target, onlyName);
-		return list;
+		return readName(new File(path), onlyName);
 	}
 	
+	/**
+	 * 获取目录下所有的文件名(包括路径)
+	 * 若变量为文件的话,则返回该文件名(包括路径)
+	 * 若onlyName为true的话,则返回文件名(不包括路径)
+	 * @param target
+	 * @param onlyName
+	 * @return
+	 */
 	public LinkedList<String> getFileList(File target, boolean onlyName) {
-		readName(target, onlyName);
-		return list;
+		return readName(target, onlyName);
 	}
 	
+	/**
+	 * 获取目录下所有的文件名(包括路径)
+	 * 若变量为文件的话,则返回该文件名(包括路径)
+	 * @param target
+	 * @return
+	 */
 	public LinkedList<String> getFileList(File target) {
-		readName(target, false);
-		return list;
+		return readName(target, false);
 	}
 	
 	public static void main(String[] args) {
-		for(String str : new ReadFile().getFileList(new File("D:/IDE"), true))
+		for(String str : new ReadFile().getFileList("D:\\IDE", "m"))
 			System.out.println(str);
 	}
 }
