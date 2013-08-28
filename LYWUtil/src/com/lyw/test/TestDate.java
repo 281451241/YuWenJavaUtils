@@ -155,6 +155,11 @@ public class TestDate {
 		c.setTimeInMillis(2111222221);
 		System.out.println(parseforDB(c.getTime()));
 	}
+	
+	public void printNowHour() {
+		Calendar c = Calendar.getInstance();
+		System.out.println(c.get(Calendar.HOUR_OF_DAY));
+	}
 
 	private long getMillisec(String str)
 	{
