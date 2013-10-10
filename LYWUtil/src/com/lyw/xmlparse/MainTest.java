@@ -11,14 +11,14 @@ public class MainTest
 		int count = 0;
 		ReadFile mReadFile = new ReadFile();
 		LinkedList<String> list = mReadFile.getFileList(
-				"D:/projects/AlphabeticIME/res/xml", 
+				"D:/projects/AlphabeticIME_2/AlphabeticIME_MASTER/res/xml", 
 				"language_", 
 				".xml");
 		
 		for(String str : list) {
 			System.out.print("<item>");
-			System.out.print(DOMParseImpl.DOMParse("D:/projects/AlphabeticIME/res/xml/" + str).get(0).getName());
-			System.out.print("_"+DOMParseImpl.DOMParse("D:/projects/AlphabeticIME/res/xml/" + str).get(0).getLength());
+			System.out.print(DOMParseImpl.DOMParse("D:/projects/AlphabeticIME_2/AlphabeticIME_MASTER/res/xml/" + str).get(0).getName());
+			System.out.print("_"+DOMParseImpl.DOMParse("D:/projects/AlphabeticIME_2/AlphabeticIME_MASTER/res/xml/" + str).get(0).getLength());
 			System.out.println("</item>");
 			count++;
 		}
