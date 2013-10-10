@@ -3,7 +3,7 @@ package com.lyw.util;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-import com.lyw.pojo.Users;
+import com.lyw.db.mybatis.User;
 
 
 public class TestReflect {
@@ -12,13 +12,13 @@ public class TestReflect {
 		Class clazz = classLoader.loadClass("pojo.Users");	
 		
 		Constructor constructor = clazz.getDeclaredConstructor((Class[])null);
-		Users users = (Users) constructor.newInstance();
+		User users = (User) constructor.newInstance();
 		
-		users.setAge("22");
-		users.setId("01");
-		users.setName("lyw");
+		users.setUserId(22);
+		users.setPassword("01");
+		users.setUserName("lyw");
 		
-		Method age = clazz.getMethod("setAge", String.class);
+		Method age = clazz.getMethod("setComment", String.class);
 		age.invoke(users, "23");
 		System.out.println(users);
 	}
