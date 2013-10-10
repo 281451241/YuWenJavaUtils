@@ -14,8 +14,8 @@ import javax.imageio.ImageWriter;
 import javax.imageio.metadata.IIOMetadata;   
 import javax.imageio.stream.ImageInputStream;   
 import javax.imageio.stream.ImageOutputStream;   
-   
-import com.sun.media.imageio.plugins.tiff.TIFFImageWriteParam;   
+
+import com.sun.media.imageio.plugins.tiff.TIFFImageWriteParam;
    
 public class ImageIOHelper {   
     /**  

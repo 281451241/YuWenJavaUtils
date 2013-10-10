@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import org.jdesktop.swingx.util.OS;
 
 public class OCR
 {
@@ -23,11 +22,12 @@ public class OCR
 		File outputFile = new File(imageFile.getParentFile(), "output");
 		StringBuffer strB = new StringBuffer();
 		List<String> cmd = new ArrayList<String>();
-		if (OS.isWindowsXP())
+		String osName = System.getProperty("os.name").toLowerCase();
+		if (osName.contains("window"))
 		{
 			cmd.add(tessPath + "//tesseract");
 		}
-		else if (OS.isLinux())
+		else if (osName.contains("linux")) // 未经证实是否可行
 		{
 			cmd.add("tesseract");
 		}

@@ -166,7 +166,9 @@ public class ReadFile {
 	}
 	
 	public static void main(String[] args) {
-		for(String str : new ReadFile().getFileList("D:\\IDE", "m"))
-			System.out.println(str);
+//		for(String str : new ReadFile().getFileList("D:\\IDE", "m"))
+//			System.out.println(str);
+		
+//		System.out.println(new ReadFile().read("D:/test/测试/catalog.txt"));
 	}
 }
