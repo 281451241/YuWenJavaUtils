@@ -50,6 +50,25 @@ public class ReadFile {
 		}
 		return str;
 	}
+	public LinkedList<String> read(String fileName, boolean flag) {
+		String string, str = null;
+		LinkedList<String> list = new LinkedList<String>();
+		try {
+			FileReader in = new FileReader(fileName);
+			BufferedReader br = new BufferedReader(in);
+			string = "";
+			str = "";
+			while ((string = br.readLine()) != null) {
+				list.add(string);
+//				str += string + '\n';
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	private LinkedList<String> readName(File target, boolean onlyName) {
 		LinkedList<String> list = new LinkedList<String>();
@@ -168,7 +187,15 @@ public class ReadFile {
 	public static void main(String[] args) {
 //		for(String str : new ReadFile().getFileList("D:\\IDE", "m"))
 //			System.out.println(str);
+		ReadFile readFile = new ReadFile();
 		
-//		System.out.println(new ReadFile().read("D:/test/测试/catalog.txt"));
+		LinkedList<String> list1 = readFile.read("D:/projects/AlphabeticIME_2/doc/语言中文名.txt", true);
+		LinkedList<String> list2 = readFile.read("D:/projects/AlphabeticIME_2/doc/语言简称.txt", true);
+		int count = list1.size();
+		for(int i=0; i<count; i++) {
+			System.out.print("<string name=\"app_full_name_");
+			System.out.println(list2.get(i) + "\">" + list1.get(i)+"键盘</string>");
+		}
+		System.out.println(count);
 	}
 }
