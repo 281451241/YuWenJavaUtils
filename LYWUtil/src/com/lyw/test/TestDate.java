@@ -35,7 +35,13 @@ public class TestDate {
 //		System.out.println(getLoginTime("001359946502639"));
 //		System.out.println(TestDate.format(yyyyMMddhhMMss, "20130705150124").getHours());
 //		System.out.println(TestDate.format(yyyyMMddhhMMss, "20130705150124").compareTo(Calendar.getInstance().getTime()));
-		System.out.println(new TestDate().getMillisec(null));
+//		System.out.println(new TestDate().getMillisec(null));
+		
+//		new TestDate().printNowHour();
+		
+//		System.out.println(getNowDate());
+		
+		getNowWeek();
 	}
 
 	private static SimpleDateFormat sdf = new SimpleDateFormat(
@@ -87,6 +93,10 @@ public class TestDate {
 	public static String getNowDate() {
 		String str = forDB.format(Calendar.getInstance().getTime());
 		return str;
+	}
+	
+	public static void getNowWeek() {
+		System.out.println(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
 	}
 
 	public static String getAge(String birthday) {
