@@ -28,7 +28,8 @@ public class OGNLTestCase extends TestCase {
         context.put("introduction","My name is ");  
           
         // Test to directly get value from root object, with no context  
-        Object name = Ognl.getValue(Ognl.parseExpression("name"), user);  
+        Object obj = Ognl.parseExpression("name");
+        Object name = Ognl.getValue(obj, user);  
         assertEquals("downpour",name);  
           
         // Test to get value(parameter) from context  
@@ -48,14 +49,16 @@ public class OGNLTestCase extends TestCase {
     @SuppressWarnings("unchecked")  
     @Test  
     public void testSetValue() throws Exception {  
-          
         // Create root object  
+    	Object obj = new Object();
         User user = new User();  
         user.setId(1);  
         user.setName("downpour");  
           
                 // Set value according to the expression  
-        Ognl.setValue("department.name", user, "dev");  
+        Ognl.setValue("user.department.name", obj, "dev");  
+        
+        System.out.println(((Department)Ognl.getValue("department", obj)).getName());
         assertEquals("dev", user.getDepartment().getName());  
           
     }  
