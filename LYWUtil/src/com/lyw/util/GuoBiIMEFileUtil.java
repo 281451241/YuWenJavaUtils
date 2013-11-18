@@ -32,9 +32,10 @@ public class GuoBiIMEFileUtil {
 //		util.new LanguageListUtil().getSettingsLanguageList();
 //		util.new LanguageListUtil().getBuildPropertiseEnableLangs();
 //		util.new LanguageListUtil().getBuildSomeLangDataOnlyCondition();
+		util.new LanguageListUtil().getBuildSomeLangDataOnlyIfThen();
 //		util.new LanguageListUtil().getBuildSomeLangDataOnlyIfThen();
 	}
-	
+
 	private class LanguageListUtil {
 		private final static String BASE_PATH = "D:/projects/AlphabeticIME_2/GuoBiIME_Alphabetic_2_Develop/res/xml/";
 		
@@ -101,6 +102,23 @@ public class GuoBiIMEFileUtil {
 					".xml");
 			for(String str : list) {
 				String isoName = DOMParseImpl.DOMParse(BASE_PATH + str).get(0).getLength().toLowerCase();
+				System.out.print("\t\t\t<property name=\"is.enable.");
+				System.out.print(isoName);
+				System.out.println("\" value=\"true\"/>");
+				count++;
+			}
+			System.out.println("count: " + count);
+		}
+		
+		private void getBuildSomeLangDataProperty() {
+			int count = 0;
+			ReadFile mReadFile = new ReadFile();
+			LinkedList<String> list = mReadFile.getFileList(
+					BASE_PATH,
+					"language_", 
+					".xml");
+			for(String str : list) {
+				String isoName = DOMParseImpl.DOMParse(BASE_PATH + str).get(0).getLength().toLowerCase();
 				System.out.print("\t\t<if condition=\"${is.enable.");
 				System.out.print(isoName);
 				System.out.println("}\"><then>");
@@ -116,7 +134,7 @@ public class GuoBiIMEFileUtil {
 	
 	private class RenameIcon {
 		
-		private final static String BASE_PATH = "D:/projects/AlphabeticIME_2/pic/外语言图标96_10.30/";
+		private final static String BASE_PATH = "D:/projects/AlphabeticIME_2/pic/外语言图标96_11.15/";
 		
 		private LinkedList<String> mChineseName;
 		private LinkedList<String> mShortName;
