@@ -26,7 +26,7 @@ public class Test extends AbstractCopyUtil{
 	public String changeFileTitle(File sourceFile, String allPath) {
 		System.out.println(allPath);
 		// TODO Auto-generated method stub
-		return allPath+"aaaa";
+		return allPath;
 	}
 
 	@Override
@@ -48,7 +48,10 @@ public class Test extends AbstractCopyUtil{
 	}
 	
 	public static void main(String[] args) {
-		Test test = new Test("D:/pic", "E:/pic");
+//		Test test = new Test("D:/pic", "E:/pic");
+		
+		Test test = new Test("D:/projects/AlphabeticIME_2/pic/外语言图标96_10.30/阿尔巴尼亚语.png",
+				"D:/projects/AlphabeticIME_2/pic/外语言图标96_10.30/icon_af.png");
 	}
 
 }
