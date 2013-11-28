@@ -7,5 +7,9 @@
 	<classpathentry kind="lib" path="libs/javassist-3.11.0.GA.jar"/>
 	<classpathentry kind="lib" path="libs/ognl-3.0.6.jar" sourcepath="D:/package/jar/struts-2.3.15.2/lib/ognl-3.0.8-sources.jar"/>
 	<classpathentry kind="lib" path="libs/mybatis-3.2.2.jar"/>
+	<classpathentry kind="lib" path="libs/jaxen-1.1-beta-6.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-api-2.0-beta9.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-core-2.0-beta9.jar"/>
+	<classpathentry kind="lib" path="libs/dom4j-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

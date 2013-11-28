@@ -1,4 +1,4 @@
-package com.lyw.util;
+package com.lyw.guobi.util;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,11 +28,12 @@ public class GuoBiIMEFileUtil {
 	
 	public static void main(String[] args) {
 		GuoBiIMEFileUtil util = new GuoBiIMEFileUtil();
+		util.getSettingsLanguageList();
 //		util.renameIconFile();
 //		util.new LanguageListUtil().getSettingsLanguageList();
 //		util.new LanguageListUtil().getBuildPropertiseEnableLangs();
 //		util.new LanguageListUtil().getBuildSomeLangDataOnlyCondition();
-		util.new LanguageListUtil().getBuildSomeLangDataOnlyIfThen();
+//		util.new LanguageListUtil().getBuildSomeLangDataOnlyIfThen();
 //		util.new LanguageListUtil().getBuildSomeLangDataOnlyIfThen();
 	}
 

@@ -1,5 +1,7 @@
 package com.lyw.util;
 
+import java.util.ArrayList;
+
 public class TestArray
 {
 	private void isArrayItem() {
@@ -39,5 +41,26 @@ public class TestArray
 			res[i] = arrayString[i][idx];
 		}
 		return res;
+	}
+	
+	public void testCopyArray() {
+		int[] src = {0,1,2,3,4,5};
+		int[] dsc = new int[7];
+		System.arraycopy(src, 2, dsc, 3, 3);
+		
+		for(int i : dsc) 
+			System.out.print(i + ", ");
+	}
+	
+	public void testSetArray() {
+		int[] src = {0,1,2,3,4,5};
+		ArrayList<String> testArray = new ArrayList<String>();
+//		Array.
+		for(int i : src) 
+			System.out.print(i + ", ");
+	}
+	
+	public static void main(String[] args) {
+		new TestArray().testCopyArray();
 	}
 }
